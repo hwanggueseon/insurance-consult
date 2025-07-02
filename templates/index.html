@@ -2,112 +2,176 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>엠금융 이혜란 팀장 보험상담 신청</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+    /* 전체 바디 스타일 */
     body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: #f5f8fa;
       margin: 0;
-      padding: 0;
+      background: #f0f4f8; /* 밝고 신뢰감 있는 연한 파랑 */
+      font-family: 'Noto Sans KR', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #2c3e50;
     }
 
+    /* 컨테이너 박스 */
     .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #ffffff;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-      margin-top: 30px;
+      background: white;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 30px 50px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(44, 62, 80, 0.15);
+      text-align: center;
     }
 
-    h1 {
-      text-align: center;
-      color: #2b3e50;
+    /* 맨 위 하트 & 사랑합니다 */
+    .header {
+      font-size: 32px;
+      font-weight: 900;
+      color: #e74c3c;
       margin-bottom: 10px;
+      letter-spacing: 4px;
+    }
+    .header .heart {
+      margin: 0 12px;
+      user-select: none;
     }
 
-    .subtext {
-      text-align: center;
-      font-size: 15px;
-      color: #444;
-      margin-bottom: 25px;
+    /* 믿을 수 있는 보험 전문가 */
+    .subheader {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2980b9;
+      margin-bottom: 40px;
+      letter-spacing: 1.2px;
     }
 
+    /* 폼 스타일 */
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 18px;
     }
-
-    input[type="text"],
-    input[type="tel"] {
-      padding: 14px;
+    input[type="text"], input[type="tel"] {
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 2px solid #bdc3c7;
+      transition: border-color 0.3s ease;
     }
-
+    input[type="text"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: #2980b9;
+      background: #ecf6fc;
+    }
     input[type="submit"] {
-      background-color: #0077cc;
+      background-color: #2980b9;
       color: white;
-      padding: 14px;
-      font-size: 16px;
+      font-weight: 800;
+      font-size: 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 14px;
+      padding: 16px 0;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background-color 0.3s ease;
+      letter-spacing: 1.5px;
     }
-
     input[type="submit"]:hover {
-      background-color: #005fa3;
+      background-color: #1c5980;
     }
 
-    .profile {
-      text-align: center;
-      margin-bottom: 30px;
+    /* 팀장명과 전화번호 */
+    .profile-info {
+      margin-top: 40px;
+      font-weight: 700;
+      font-size: 20px;
+      color: #34495e;
+      user-select: none;
+    }
+    .phone-number {
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 900;
+      color: #16a085;
+      background: #d1f0ea;
+      border-radius: 40px;
+      padding: 12px 30px;
+      display: inline-block;
+      letter-spacing: 3px;
+      user-select: text;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(22, 160, 133, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    .phone-number:hover {
+      background-color: #a0e2d6;
     }
 
-    .profile img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 10px;
+    /* 홍보 문구 */
+    .promo-texts {
+      margin-top: 50px;
+      font-style: italic;
+      color: #7f8c8d;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .promo-texts p {
+      margin: 12px 0;
+      font-size: 15px;
+    }
+    .promo-texts p strong {
+      color: #2980b9;
+      font-weight: 900;
     }
 
-    .contact {
-      font-size: 14px;
-      color: #333;
-      margin-top: 5px;
-    }
-
-    .slogan {
-      margin-top: 30px;
-      padding: 15px;
-      background: #e8f0fe;
-      border-radius: 10px;
-      font-size: 14px;
-      color: #333;
-      line-height: 1.6;
-    }
-
+    /* 푸터 */
     footer {
-      text-align: center;
-      margin-top: 30px;
+      margin-top: 50px;
       font-size: 12px;
-      color: #aaa;
+      color: #bdc3c7;
+      user-select: none;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px 40px;
+      }
+      .header {
+        font-size: 26px;
+        letter-spacing: 3px;
+      }
+      .subheader {
+        font-size: 16px;
+      }
+      .profile-info {
+        font-size: 18px;
+      }
+      .phone-number {
+        font-size: 18px;
+        padding: 10px 24px;
+        letter-spacing: 2.5px;
+      }
+      .promo-texts p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="profile">
-      <img src="https://via.placeholder.com/100x100.png?text=%EC%9D%B4%ED%98%9C%EB%9E%80" alt="이혜란 팀장" />
-      <h2>♥ 사랑합니다 ♥</h2>
-      <p class="subtext">믿을 수 있는 보험 전문가와의 상담을 지금 신청하세요!</p>
-      <div class="contact">엠금융 이혜란 팀장 · ☎ 010-7656-7368</div>
+    <div class="header">
+      <span class="heart">♥</span> 사랑합니다 <span class="heart">♥</span>
+    </div>
+    <div class="subheader">
+      믿을 수 있는 <strong>보험 전문가</strong>와의 상담을 지금 신청하세요!!
     </div>
 
     <form method="POST" action="/submit">
@@ -116,15 +180,16 @@
       <input type="submit" value="상담 신청하기" />
     </form>
 
-    <div class="slogan">
-      ✔ 상담만 받아도 보장 분석서 무료 제공!<br />
-      ✔ 당신에게 꼭 맞는 보장, 합리적인 보험료로 준비하세요.<br />
-      ✔ 최신 보험 트렌드, 가장 유리한 조건으로 안내드립니다.
+    <div class="profile-info">엠금융 이혜란 팀장</div>
+    <div class="phone-number" title="클릭하여 복사하세요">010-7656-7368</div>
+
+    <div class="promo-texts">
+      <p>“상담만 받아도 <strong>보장 분석서 무료 제공!</strong>”</p>
+      <p>“당신에게 꼭 맞는 보장, <strong>합리적인 보험료</strong>로 준비하세요.”</p>
+      <p>“최신 보험 트렌드, 가장 <strong>유리한 조건</strong>으로 안내드립니다.”</p>
     </div>
 
-    <footer>
-      ⓒ 2025 엠금융 이혜란 팀장. All rights reserved.
-    </footer>
+    <footer>ⓒ 2025 엠금융 이혜란 팀장. All rights reserved.</footer>
   </div>
 </body>
 </html>
