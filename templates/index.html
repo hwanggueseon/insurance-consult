@@ -4,106 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>보험 상담 신청</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
-      font-family: 'Nanum Gothic', sans-serif;
-      background: linear-gradient(135deg, #4a90e2, #50e3c2);
-      min-height: 100vh;
-      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      height: 100vh;
+      margin: 0;
     }
     .container {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      max-width: 420px;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 400px;
       width: 100%;
-      padding: 40px 35px;
-      color: #333;
-      transition: transform 0.3s ease;
-    }
-    .container:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.2);
     }
     h1 {
-      margin: 0 0 30px;
-      font-weight: 800;
-      font-size: 2.4rem;
+      margin-bottom: 25px;
+      color: #2c3e50;
       text-align: center;
-      color: #1a1a1a;
-      letter-spacing: 1px;
     }
     label {
       display: block;
-      font-weight: 600;
       margin-bottom: 8px;
-      font-size: 1.1rem;
-      color: #555;
+      font-weight: 600;
+      color: #34495e;
     }
-    input[type="text"],
-    input[type="tel"] {
+    input[type="text"] {
       width: 100%;
-      padding: 14px 18px;
-      margin-bottom: 22px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
       font-size: 1rem;
-      transition: border-color 0.3s ease;
-      outline: none;
+      transition: border-color 0.3s;
     }
-    input[type="text"]:focus,
-    input[type="tel"]:focus {
-      border-color: #4a90e2;
-      box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+    input[type="text"]:focus {
+      border-color: #2980b9;
+      outline: none;
     }
     button {
       width: 100%;
-      background: #4a90e2;
-      color: #fff;
+      padding: 12px;
+      background-color: #2980b9;
+      color: white;
       border: none;
-      padding: 16px 0;
-      font-size: 1.2rem;
-      font-weight: 700;
-      border-radius: 12px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      letter-spacing: 0.5px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
     button:hover {
-      background: #357abd;
-    }
-    .footer-text {
-      margin-top: 15px;
-      font-size: 0.85rem;
-      color: #888;
-      text-align: center;
-      user-select: none;
-    }
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 25px;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      button {
-        font-size: 1.1rem;
-      }
+      background-color: #1c5980;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>보험 상담 신청</h1>
-    <form action="/submit" method="post" autocomplete="off">
+    <form action="/submit" method="post">
       <label for="name">이름</label>
       <input
         type="text"
@@ -111,25 +74,23 @@
         name="name"
         placeholder="이름을 입력하세요"
         required
-        minlength="2"
         maxlength="30"
       />
-
-      <label for="phone">휴대폰 번호</label>
+      
+      <label for="phone">전화번호 (숫자만 입력)</label>
       <input
-        type="tel"
+        type="text"
         id="phone"
         name="phone"
-        placeholder="010-1234-5678 형식으로 입력"
-        pattern="^\d{3}-\d{4}-\d{4}$"
+        placeholder="예: 01012345678"
         required
+        pattern="\d{10,11}"
+        title="숫자만 10~11자리 입력하세요"
+        maxlength="11"
       />
-
-      <button type="submit">상담 신청하기</button>
+      
+      <button type="submit">상담 신청</button>
     </form>
-    <p class="footer-text">
-      입력하신 개인정보는 상담 용도로만 사용되며, 안전하게 관리됩니다.
-    </p>
   </div>
 </body>
 </html>
