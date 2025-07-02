@@ -1,68 +1,121 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>보험 상담 신청</title>
     <style>
         body {
-            font-family: 'Malgun Gothic', sans-serif;
-            background: linear-gradient(135deg, #6b8ce3, #88e0ef);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            align-items: flex-start;
+            min-height: 100vh;
         }
+
         .container {
             background: white;
+            margin-top: 50px;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            width: 320px;
-            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
         }
-        h1 {
+
+        .hook {
+            background-color: #E3F2FD;
+            padding: 15px;
+            border-left: 5px solid #1976D2;
             margin-bottom: 20px;
-            color: #2c3e50;
+            font-size: 16px;
+            color: #0D47A1;
+            border-radius: 8px;
         }
-        input[type=text], input[type=tel] {
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="tel"] {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0 20px 0;
-            border: 1.5px solid #3498db;
+            padding: 12px;
+            border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 16px;
+            box-sizing: border-box;
         }
+
         button {
-            background-color: #3498db;
-            border: none;
-            color: white;
-            padding: 12px;
+            margin-top: 25px;
             width: 100%;
-            font-size: 18px;
+            padding: 14px;
+            background-color: #1976D2;
+            color: white;
+            font-size: 16px;
+            border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
-            background-color: #2980b9;
+            background-color: #1565C0;
         }
-        .footer {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #888;
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                margin-top: 20px;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input, button {
+                font-size: 15px;
+            }
+
+            .hook {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>보험 상담 신청</h1>
-        <form method="POST" action="/submit">
-            <input type="text" name="name" placeholder="이름을 입력하세요" required />
-            <input type="tel" name="phone" placeholder="전화번호 (숫자만 입력)" pattern="[0-9]{9,11}" required />
-            <button type="submit">신청하기</button>
+        <div class="hook">
+            📞 믿고 맡길 수 있는 보험 전문가, <strong>엠금융 이혜란 팀장</strong>과 함께하세요!
+            지금 간편하게 상담 신청하시면 빠르게 연락드려요.
+        </div>
+
+        <h2>보험 상담 신청</h2>
+        <form action="/submit" method="POST">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+
+            <label for="phone">전화번호 (숫자만)</label>
+            <input type="tel" id="phone" name="phone" placeholder="예: 01012345678" pattern="\d{10,11}" required>
+
+            <button type="submit">상담 신청하기</button>
         </form>
-        <div class="footer">※ 입력하신 정보는 안전하게 처리됩니다.</div>
     </div>
 </body>
 </html>
