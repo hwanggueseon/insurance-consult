@@ -3,120 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>보험 상담 신청</title>
+    <title>엠금융 이혜란 팀장 보험상담 신청</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f5f8fa;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
         }
 
         .container {
-            background: white;
-            margin-top: 50px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-top: 30px;
         }
 
-        .hook {
-            background-color: #E3F2FD;
-            padding: 15px;
-            border-left: 5px solid #1976D2;
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #0D47A1;
-            border-radius: 8px;
-        }
-
-        h2 {
+        h1 {
             text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+            color: #2b3e50;
+            margin-bottom: 10px;
         }
 
-        label {
-            font-size: 16px;
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
+        .subtext {
+            text-align: center;
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         input[type="text"], input[type="tel"] {
-            width: 100%;
-            padding: 12px;
+            padding: 14px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
         }
 
-        button {
-            margin-top: 25px;
-            width: 100%;
-            padding: 14px;
-            background-color: #1976D2;
+        input[type="submit"] {
+            background-color: #0077cc;
             color: white;
+            padding: 14px;
             font-size: 16px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s;
         }
 
-        button:hover {
-            background-color: #1565C0;
+        input[type="submit"]:hover {
+            background-color: #005fa3;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .logos {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logos img {
+            height: 40px;
+            object-fit: contain;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .logos img:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
+            .logos img {
+                height: 30px;
             }
+        }
 
-            .container {
-                margin-top: 20px;
-                padding: 20px;
-            }
-
-            h2 {
-                font-size: 20px;
-            }
-
-            input, button {
-                font-size: 15px;
-            }
-
-            .hook {
-                font-size: 14px;
-            }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="hook">
-            📞 믿고 맡길 수 있는 보험 전문가, 
-<strong>엠금융 이혜란 팀장</strong>과 함께하세요!
-            지금 간편하게 상담 신청하시면 빠르게 연락드려요.
+        <div class="profile">
+            <img src="https://via.placeholder.com/100x100.png?text=%EC%9D%B4%ED%98%9C%EB%9E%80" alt="이혜란 팀장">
+            <h2>엠금융 이혜란 팀장</h2>
+            <p class="subtext">믿을 수 있는 보험 전문가와의 상담을 지금 신청하세요!</p>
         </div>
 
-        <h2>보험 상담 신청</h2>
-        <form action="/submit" method="POST">
-            <label for="name">이름</label>
-            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-
-            <label for="phone">전화번호 (숫자만)</label>
-            <input type="tel" id="phone" name="phone" placeholder="예: 01012345678" pattern="\d{10,11}" required>
-
-            <button type="submit">상담 신청하기</button>
+        <form method="POST" action="/submit">
+            <input type="text" name="name" placeholder="이름을 입력하세요" required>
+            <input type="tel" name="phone" placeholder="전화번호 (숫자만 입력)" pattern="[0-9]{10,11}" required>
+            <input type="submit" value="상담 신청하기">
         </form>
+
+        <div class="logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Samsung_Logo.svg" alt="삼성생명" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Kyobo_Life_Insurance_logo.svg" alt="교보생명" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/MetLife_logo.svg" alt="메트라이프" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/AIA_logo.svg" alt="AIA생명" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Prudential_logo.svg" alt="푸르덴셜" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Allianz_Logo_2017.svg" alt="알리안츠" />
+        </div>
+
+        <footer>
+            ⓒ 2025 엠금융 이혜란 팀장. All rights reserved.
+        </footer>
     </div>
 </body>
 </html>
