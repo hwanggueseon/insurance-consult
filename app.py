@@ -1,6 +1,32 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, request, render_template, redirect
+import requests
 
 app = Flask(__name__)
+
+# 쿨SMS API 정보
+API_KEY = '당신의_API_KEY_여기에'
+API_SECRET = '당신의_API_SECRET_여기에'
+TO_NUMBER = '01098330912'       # 당신이 문자 받을 번호
+FROM_NUMBER = '01098330912'   # 쿨SMS에 등록한 발신번호
+
+def send_sms(name, phone):
+    message = f"📥 보험 상담 신청\n이름: {name}\n전화번호: {phone}"
+
+    url = 'https://api.coolsms.co.kr/messages/v4/send'
+    headers = {
+        'Authorization': f'HMAC {API_KEY}:{API_SECRET}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'message': {
+            'to': TO_NUMBER,
+            'from': FROM_NUMBER,
+            'text': message
+        }
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    print("문자 전송 결과:", response.status_code, response.text)
 
 @app.route('/')
 def index():
@@ -8,18 +34,14 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    name = request.form.get('name')
-    phone = request.form.get('phone')
-    
-    # 여기서 문자 API를 호출하는 코드를 넣을 수 있어요.
-    # 일단은 그냥 확인용으로 출력해 봅니다.
-    print(f"상담 신청 - 이름: {name}, 전화번호: {phone}")
-    
+    name = request.form['name']
+    phone = request.form['phone']
+    send_sms(name, phone)
     return redirect('/complete')
 
 @app.route('/complete')
 def complete():
-    return "<h2>상담 신청이 완료되었습니다! 곧 연락드리겠습니다.</h2>"
+    return render_template('complete.html')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
