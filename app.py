@@ -1,54 +1,41 @@
-from flask import Flask, render_template, request, redirect, url_for
-import requests
+from flask import Flask, render_template, request, redirect
+import smtplib
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
-# 쿨SMS API 정보 (발신번호는 반드시 쿨SMS에 등록된 번호로 바꿔주세요)
-API_KEY = 'NCSNJWYSDPSBJDY2'
-API_SECRET = 'JNDC10JIYQXEKHW1PBTHDWNBLQ3MU8NM'
-FROM_NUMBER = '01000000000'  # 쿨SMS 발신번호 등록된 번호
-TO_NUMBER = '01098330912'    # 수신자 번호 (본인 번호)
+def send_email(subject, body, to_email):
+    from_email = "01098330912a@gmail.com"       # 보내는 이메일 (당신 이메일)
+    password = "Qnals112!!@"       # Gmail 앱 비밀번호 입력
 
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_email
+    msg['To'] = to_email
 
-def send_sms(name, phone):
-    url = 'https://api.coolsms.co.kr/messages/v4/send'
-    headers = {
-        'Authorization': f'HMAC {API_KEY}:{API_SECRET}',
-        'Content-Type': 'application/json; charset=utf-8'
-    }
-    data = {
-        'messages': [{
-            'to': TO_NUMBER,
-            'from': FROM_NUMBER,
-            'text': f'[보험상담신청]\n이름: {name}\n전화번호: {phone}'
-        }]
-    }
-    try:
-        response = requests.post(url, headers=headers, json=data)
-        response.raise_for_status()
-        print('문자 전송 성공:', response.json())
-    except Exception as e:
-        print('문자 전송 실패:', e)
-
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        server.login(from_email, password)
+        server.sendmail(from_email, to_email, msg.as_string())
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    return render_template('index.html')  # 인덱스 페이지
 
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form.get('name')
     phone = request.form.get('phone')
-    print(f'상담 신청 - 이름: {name}, 전화번호: {phone}')
-    send_sms(name, phone)
-    return redirect(url_for('complete'))
 
+    subject = "보험 상담 신청 알림"
+    body = f"상담 신청이 접수되었습니다.\n\n이름: {name}\n전화번호: {phone}"
+
+    send_email(subject, body, "a76567368@gmail.com")  # 상담 내용을 받을 이메일
+
+    return redirect('/complete')
 
 @app.route('/complete')
 def complete():
-    return render_template('complete.html')
-
+    return render_template('complete.html')  # 완료 페이지
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
